@@ -5,7 +5,7 @@ public class PhilosopherRoom extends Thread {
     private final int id;
     public final Fork left;
     public final Fork right;
-    static final Semaphore room = new Semaphore(2);
+    static final Semaphore room = new Semaphore(4);
 
     public PhilosopherRoom(int id, Fork f1, Fork f2) {
         this.id = id;
