@@ -14,19 +14,23 @@ public class PhilosopherSeenWant extends Thread {
 
     @Override
     public void run() {
-            for (int i = 0; i < count; i++) {
-                System.out.println("Philosopher " + id + " is trying to pick up forks " + left.id + " and " + right.id);
-                if (left.tryTake()) {
-                    if (right.tryTake()) {
-                        System.out.println("Philosopher " + id + " is eating");
-                        left.put();
-                        right.put();
-                        System.out.println("Philosopher " + id + " puts down forks " + left.id + " and " + right.id);
-                    } else {
-                        left.put();
-                        System.out.println("Philosopher " + id + " puts down left fork " + left.id);
-                    }
+        int hasEaten = 0;
+        do{
+            System.out.println("Philosopher " + id + " is trying to pick up forks " + left.id + " and " + right.id);
+            if (left.tryTake())
+            {
+                if (right.tryTake())
+                {
+                    System.out.println("Philosopher " + id + " is eating");
+                    left.put();
+                    right.put();
+                    hasEaten++;
+                    System.out.println("Philosopher " + id + " puts down forks " + left.id + " and " + right.id);
+                } else {
+                    left.put();
+                    System.out.println("Philosopher " + id + " puts down left fork " + left.id);
                 }
             }
+        } while (hasEaten != count);
     }
 }

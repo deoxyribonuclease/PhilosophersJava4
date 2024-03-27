@@ -17,20 +17,21 @@ public class PhilosopherRoom extends Thread {
     @Override
     public void run() {
         try {
-            for (int i = 0; i < count; i++) {
+            int hasEaten = 0;
+            do {
                 System.out.println("Philosopher " + id + " is trying to pick up forks " + left.id + " and " + right.id);
                 room.acquire();
                 left.take();
                 right.take();
+                hasEaten++;
                 System.out.println("Philosopher " + id + " is eating");
                 left.put();
                 right.put();
                 room.release();
                 System.out.println("Philosopher " + id + " puts down forks " + left.id + " and " + right.id);
-            }
+            } while (hasEaten != count);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
-
 }

@@ -16,18 +16,21 @@ public class PhilosopherToken extends Thread {
 
     @Override
     public void run() {
-            int hasEaten = 0;
-            do
-                if (token.get() == id) {
-                    System.out.println("Philosopher " + id + " is trying to pick up forks " + left.id + " and " + right.id);
-                    left.take();
-                    right.take();
-                    System.out.println("Philosopher " + id + " is eating");
-                    hasEaten++;
-                    token.set((id + 2) % count);
-                    left.put();
-                    right.put();
-                    System.out.println("Philosopher " + id + " puts down forks " + left.id + " and " + right.id);
-                } while (hasEaten != count);
+        int hasEaten = 0;
+        do
+        {
+            if (token.get() == id)
+            {
+                System.out.println("Philosopher " + id + " is trying to pick up forks " + left.id + " and " + right.id);
+                left.take();
+                right.take();
+                System.out.println("Philosopher " + id + " is eating");
+                hasEaten++;
+                token.set((id + 2) % count);
+                left.put();
+                right.put();
+                System.out.println("Philosopher " + id + " puts down forks " + left.id + " and " + right.id);
+            }
+        } while (hasEaten != count);
     }
 }
